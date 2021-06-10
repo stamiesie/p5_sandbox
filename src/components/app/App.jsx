@@ -44,11 +44,12 @@ export default function App() {
   };
 
   const sketch = (p5) => {
-    p5.input;
+    p5.textInput;
+    p5.slider;
   
     p5.setup = () => {
       p5.canvas = p5.createCanvas(p5.windowWidth, p5.windowHeight);
-      p5.canvas.class('random-art-anvas');
+      p5.canvas.class('p5Canvas');
     
       // create the input
       p5.textInput = p5.createInput();
@@ -63,6 +64,12 @@ export default function App() {
       const textIn = document.getElementById('text-input');
       const newLabel = document.getElementById('text-input-label');
       newLabel.appendChild(textIn);
+
+      // slider
+      p5.slider = p5.createSlider(10, 100, 45, 1);
+      const val = p5.slider.value();
+
+
     
       // p5.noStroke();
       p5.stroke(randomizeColor(), randomizeColor(), randomizeColor());
@@ -107,7 +114,7 @@ export default function App() {
               p5.square(
                 p5.random(p5.windowWidth),
                 p5.random(p5.windowHeight),
-                p5.random(newDensity)
+                p5.random(val)
                 );
 
                 p5.circle(
@@ -128,6 +135,8 @@ export default function App() {
               p5.draw = () => {
                 p5.text(p5.textInput.value(), 200, 200);
                 p5.textSize(30);
+
+                // let val = p5.slider.value();
 };
             };
 
