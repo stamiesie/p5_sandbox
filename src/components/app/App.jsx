@@ -7,30 +7,129 @@ import P5Wrapper from 'react-p5-wrapper';
 export default function App() {
   const [counter, setCounter] = useState(0);
 
-  const sketch = (p5) => {
-    p5.setup = () => {
-      p5.createCanvas(p5.windowWidth, p5.windowHeight);
-      // p5.noStroke();
+  // const sketch = (p5) => {
+  //   p5.setup = () => {
+  //     p5.createCanvas(p5.windowWidth, p5.windowHeight);
+  //     p5.background(255);
+  //     // p5.noStroke();
 
-      for(let i = 0; i < 100; i++) {
-        p5.fill(p5.random(200), p5.random(200), p5.random(200), p5.random(255));
+  //     for(let i = 0; i < 100; i++) {
+  //       p5.fill(p5.random(200), p5.random(200), p5.random(200), p5.random(255));
         
-        p5.square(
-          p5.random(p5.windowWidth),
-          p5.random(p5.windowHeight),
-          p5.random(100)
-          );
+  //       p5.square(
+  //         p5.random(p5.windowWidth),
+  //         p5.random(p5.windowHeight),
+  //         p5.random(100)
+  //         );
           
-          p5.circle(
-            p5.random(p5.windowWidth),
-            p5.random(p5.windowHeight),
-            p5.random(100)
-            );
-          }
-          // const button = p5.createButton('SAVE');
-          // button.mousePressed(p5.saveCanvas('myCanvas', 'png'));
-    };
+  //         p5.circle(
+  //           p5.random(p5.windowWidth),
+  //           p5.random(p5.windowHeight),
+  //           p5.random(100)
+  //           );
+  //         }
+  //   };
+  // };
+
+  const randomizeRatio = () => {
+    return Math.round(Math.random() * 100);
   };
+  
+  const randomizeColor = () => {
+    return Math.round(Math.random() * 254);
+  };
+
+  const randomizeCurve = () => {
+    return Math.round(Math.random() * 640);
+  };
+
+  const sketch = (p5) => {
+    p5.input;
+  
+    p5.setup = () => {
+      p5.canvas = p5.createCanvas(p5.windowWidth, p5.windowHeight);
+      p5.canvas.class('random-art-anvas');
+    
+      // create the input
+      p5.textInput = p5.createInput();
+      p5.textInput.class('Stephen');
+      p5.textInput.id('text-input');
+
+      // create the label
+      p5.label = p5.createElement('label', 'Type text here');
+      p5.label.id('text-input-label');
+
+      // append the input to the label
+      const textIn = document.getElementById('text-input');
+      const newLabel = document.getElementById('text-input-label');
+      newLabel.appendChild(textIn);
+    
+      // p5.noStroke();
+      p5.stroke(randomizeColor(), randomizeColor(), randomizeColor());
+      // p5.background(randomizeColor(), randomizeColor(), randomizeColor());
+      p5.background(randomizeColor(), randomizeColor(), randomizeColor());
+
+      //p5.erase(randomizeColor(), randomizeColor(), randomizeColor());
+      //p5.arc(50, 50, randomizeRatio(), randomizeRatio(), 2, 5);
+      // p5.bezier(
+        //   randomizeCurve(),
+        //   randomizeCurve(),
+        //   randomizeCurve(),
+        //   randomizeCurve(),
+        //   randomizeCurve(),
+        //   randomizeCurve(),
+        //   randomizeCurve(),
+        //   randomizeCurve()
+        // );
+
+        // p5.bezier(
+          //   randomizeCurve(),
+          //   randomizeCurve(),
+          //   randomizeCurve(),
+          //   randomizeCurve(),
+          //   randomizeCurve(),
+          //   randomizeCurve(),
+          //   randomizeCurve(),
+          //   randomizeCurve()
+          // );
+
+          const newDensity = randomizeRatio();
+          const newColor = randomizeColor();
+    
+          for(let i = 0; i < 1000; i++) {
+            p5.fill(
+              p5.random(newColor),
+              p5.random(newColor),
+              p5.random(newColor),
+              p5.random(newColor)
+              );
+    
+              p5.square(
+                p5.random(p5.windowWidth),
+                p5.random(p5.windowHeight),
+                p5.random(newDensity)
+                );
+
+                p5.circle(
+                  p5.random(p5.windowWidth),
+                  p5.random(p5.windowHeight),
+                  p5.random(newDensity)
+                  );
+                  
+                p5.triangle(
+                  p5.random(p5.windowWidth),
+                  p5.random(p5.windowHeight),
+                  p5.random(newDensity)
+                  );
+                }
+                
+              };
+              
+              p5.draw = () => {
+                p5.text(p5.textInput.value(), 200, 200);
+                p5.textSize(30);
+};
+            };
 
   const handleRandomClick = () => {
     setCounter(counter + 1);
@@ -42,12 +141,12 @@ export default function App() {
 
     // get canvas data
     const canvas = document.getElementsByClassName('p5Canvas');
-    console.log(canvas);
+      console.log(canvas);
     const dataURL = canvas[0].toDataURL('image/png');
-    console.log(dataURL);
+      console.log(dataURL);
 
     // create temporary link (could make all of this a util function)
-    const saveCanvas = document.createElement('a');
+  const saveCanvas = document.createElement('a');
     saveCanvas.download = 'greeting.png';
     saveCanvas.href = dataURL;
 
@@ -67,9 +166,82 @@ export default function App() {
     <>
       <button onClick={handleRandomClick}>Randomize</button>
       <button onClick={handleSaveClick}>Save</button>
-    <div>
+    <div className="wrapper">
       <P5Wrapper sketch={sketch} />
     </div>
     </>
   );
 }
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+         
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+  
